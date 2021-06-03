@@ -1,5 +1,6 @@
 2021-05-27 16:54:22,005 - Model - INFO - PARAMETER ...
-2021-05-27 16:54:22,005 - Model - INFO - Namespace(batch_size=24, gpu='0', log_dir='pointnet2_part_seg_msg', normal=True, num_point=2048, num_votes=3)
+2021-05-27 16:54:22,005 - Model - INFO - Namespace(batch_size=24, gpu='0',
+    log_dir='pointnet2_part_seg_msg', normal=True, num_point=2048, num_votes=3)
 2021-05-27 16:54:22,060 - Model - INFO - The number of test data is: 2874
 2021-05-27 16:58:35,995 - Model - INFO - eval mIoU of Airplane       0.792679
 2021-05-27 16:58:35,996 - Model - INFO - eval mIoU of Bag            0.772989
