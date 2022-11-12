@@ -70,9 +70,9 @@ def farthest_point_sample(xyz, npoint):
     """
     device = xyz.device
     B, N, C = xyz.shape
-    centroids = torch.zeros(B, npoint, dtype=torch.long).to(device)#8*512
+    centroids = torch.zeros(B, npoint, dtype=torch.long).to(device) # 8*512
     distance = torch.ones(B, N).to(device) * 1e10 #8*1024
-    farthest = torch.randint(0, N, (B,), dtype=torch.long).to(device)#batch里每个样本随机初始化一个最远点的索引
+    farthest = torch.randint(0, N, (B,), dtype=torch.long).to(device) # batch里每个样本随机初始化一个最远点的索引
     batch_indices = torch.arange(B, dtype=torch.long).to(device)
     for i in range(npoint):
         centroids[:, i] = farthest #第一个采样点选随机初始化的索引
@@ -165,13 +165,14 @@ def sample_and_group_all(xyz, points):
 
 class PointNetSetAbstraction(nn.Module):
     def __init__(self, npoint, radius, nsample, in_channel, mlp, group_all):
+
         super(PointNetSetAbstraction, self).__init__()
-        self.npoint = npoint
-        self.radius = radius
-        self.nsample = nsample
+        self.npoint = npoint  # 输出点的个数  512
+        self.radius = radius  # 半径  [0.1, 0.2, 0.4]
+        self.nsample = nsample  # 采样点列表  [32, 64, 128]
         self.mlp_convs = nn.ModuleList()
         self.mlp_bns = nn.ModuleList()
-        last_channel = in_channel
+        last_channel = in_channel  # 3+additional_channel
         for out_channel in mlp:
             self.mlp_convs.append(nn.Conv2d(last_channel, out_channel, 1))
             self.mlp_bns.append(nn.BatchNorm2d(out_channel))
@@ -214,17 +215,18 @@ class PointNetSetAbstraction(nn.Module):
 
 class PointNetSetAbstractionMsg(nn.Module):
     def __init__(self, npoint, radius_list, nsample_list, in_channel, mlp_list):
+        # PointNetSetAbstractionMsg(512, [0.1, 0.2, 0.4], [32, 64, 128], 3+additional_channel, [[32, 32, 64], [64, 64, 128], [64, 96, 128]])
         super(PointNetSetAbstractionMsg, self).__init__()
-        self.npoint = npoint
-        self.radius_list = radius_list
-        self.nsample_list = nsample_list
+        self.npoint = npoint  # 中心点： 512
+        self.radius_list = radius_list  #
+        self.nsample_list = nsample_list  # [32, 64, 128]
         self.conv_blocks = nn.ModuleList()
         self.bn_blocks = nn.ModuleList()
-        for i in range(len(mlp_list)):
+        for i in range(len(mlp_list)):  # mlp_list： [[32, 32, 64], [64, 64, 128], [64, 96, 128]]
             convs = nn.ModuleList()
             bns = nn.ModuleList()
             last_channel = in_channel + 3
-            for out_channel in mlp_list[i]:
+            for out_channel in mlp_list[i]:  # 迭代构建网络
                 convs.append(nn.Conv2d(last_channel, out_channel, 1))
                 bns.append(nn.BatchNorm2d(out_channel))
                 last_channel = out_channel
@@ -240,41 +242,41 @@ class PointNetSetAbstractionMsg(nn.Module):
             new_xyz: sampled points position data, [B, C, S]
             new_points_concat: sample points feature data, [B, D', S]
         """
-        xyz = xyz.permute(0, 2, 1) #就是坐标点位置特征
+        xyz = xyz.permute(0, 2, 1) #就是坐标点位置特征  torch.Size([4, 3, 2048]) =》 torch.Size([4, 2048, 3])
         # print(xyz.shape)
         if points is not None:
-            points = points.permute(0, 2, 1) ##就是额外提取的特征，第一次的时候就是那个法向量特征
+            points = points.permute(0, 2, 1)  # 就是额外提取的特征，第一次的时候就是那个法向量特征  torch.Size([4, 2048, 6])
         # print(points.shape)
-        B, N, C = xyz.shape
-        S = self.npoint
-        new_xyz = index_points(xyz, farthest_point_sample(xyz, S))#采样后的点
+        B, N, C = xyz.shape  # torch.Size([4, 2048, 3])
+        S = self.npoint  # 采样点的个数
+        new_xyz = index_points(xyz, farthest_point_sample(xyz, S))  # 采样后的点  torch.Size([4, 512, 3])  新的被选出来的点
         # print(new_xyz.shape)
         new_points_list = []
-        for i, radius in enumerate(self.radius_list):
-            K = self.nsample_list[i]
-            group_idx = query_ball_point(radius, K, xyz, new_xyz)#返回的是索引
-            grouped_xyz = index_points(xyz, group_idx)#得到各个组中实际点
-            grouped_xyz -= new_xyz.view(B, S, 1, C)#去mean new_xyz相当于簇的中心点
+        for i, radius in enumerate(self.radius_list):  # [0.1,0.2,0.4]
+            K = self.nsample_list[i]  # [32, 64, 128]
+            group_idx = query_ball_point(radius, K, xyz, new_xyz)  # 返回的是索引  torch.Size([4, 512, 32])
+            grouped_xyz = index_points(xyz, group_idx)  # 得到各个组中实际点   torch.Size([4, 512, 32, 3])   32个近邻点
+            grouped_xyz -= new_xyz.view(B, S, 1, C)  # 去mean new_xyz相当于簇的中心点  得到相对于中心点的位置
             if points is not None:
-                grouped_points = index_points(points, group_idx)
-                grouped_points = torch.cat([grouped_points, grouped_xyz], dim=-1)
+                grouped_points = index_points(points, group_idx)  # torch.Size([4, 512, 32, 6])  得到32个近邻点的特征
+                grouped_points = torch.cat([grouped_points, grouped_xyz], dim=-1)    # torch.Size([4, 512, 32, 9])  在最后一维上加
                 # print(grouped_points.shape)
             else:
                 grouped_points = grouped_xyz
 
-            grouped_points = grouped_points.permute(0, 3, 2, 1)  # [B, D, K, S]
+            grouped_points = grouped_points.permute(0, 3, 2, 1)  # [B, D, K, S]  通道前置  torch.Size([4, 9, 32, 512])
             # print(grouped_points.shape)
-            for j in range(len(self.conv_blocks[i])):
+            for j in range(len(self.conv_blocks[i])):  # 对这32个点进行特征聚集
                 conv = self.conv_blocks[i][j]
                 bn = self.bn_blocks[i][j]
                 grouped_points =  F.relu(bn(conv(grouped_points)))
-            # print(grouped_points.shape)
-            new_points = torch.max(grouped_points, 2)[0]  # [B, D', S] 就是pointnet里的maxpool操作
+            # print(grouped_points.shape)  torch.Size([4, 64, 32, 512])  特征变为64
+            new_points = torch.max(grouped_points, 2)[0]  # [B, D', S] 就是pointnet里的maxpool操作  torch.Size([4, 64, 512])
             # print(new_points.shape)
             new_points_list.append(new_points)
-
-        new_xyz = new_xyz.permute(0, 2, 1)
-        new_points_concat = torch.cat(new_points_list, dim=1)
+        # print(len(new_points_list))  # 3   内部有3个tensor，分别对应torch.Size([4, 64, 512])  torch.Size([4, 128, 512])  torch.Size([4, 128, 512])
+        new_xyz = new_xyz.permute(0, 2, 1)  # torch.Size([4, 3, 512])
+        new_points_concat = torch.cat(new_points_list, dim=1)  # [4,64+128+128=320,512]
         # print(new_points_concat.shape)
         return new_xyz, new_points_concat
 

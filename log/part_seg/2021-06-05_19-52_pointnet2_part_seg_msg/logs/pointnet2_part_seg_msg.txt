@@ -1,0 +1,134 @@
+2021-06-05 19:53:37,503 - Model - INFO - PARAMETER ...
+2021-06-05 19:53:37,504 - Model - INFO - Namespace(batch_size=12, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-05 19:53:38,051 - Model - INFO - The number of training data is: 13998
+2021-06-05 19:53:38,051 - Model - INFO - The number of test data is: 2874
+2021-06-05 20:12:19,143 - Model - INFO - PARAMETER ...
+2021-06-05 20:12:19,143 - Model - INFO - Namespace(batch_size=12, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-05 20:12:19,692 - Model - INFO - The number of training data is: 13998
+2021-06-05 20:12:19,693 - Model - INFO - The number of test data is: 2874
+2021-06-05 20:12:21,112 - Model - INFO - No existing model, starting training from scratch...
+2021-06-05 20:12:21,118 - Model - INFO - Epoch 1 (1/251):
+2021-06-05 20:12:21,118 - Model - INFO - Learning rate:0.001000
+2021-06-05 20:13:46,244 - Model - INFO - PARAMETER ...
+2021-06-05 20:13:46,244 - Model - INFO - Namespace(batch_size=12, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-05 20:18:14,879 - Model - INFO - The number of training data is: 13998
+2021-06-05 20:18:14,879 - Model - INFO - The number of test data is: 2874
+2021-06-05 20:22:50,343 - Model - INFO - No existing model, starting training from scratch...
+2021-06-05 20:27:37,770 - Model - INFO - PARAMETER ...
+2021-06-05 20:27:37,770 - Model - INFO - Namespace(batch_size=12, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-05 20:27:40,808 - Model - INFO - The number of training data is: 13998
+2021-06-05 20:27:40,808 - Model - INFO - The number of test data is: 2874
+2021-06-05 20:27:43,171 - Model - INFO - No existing model, starting training from scratch...
+2021-06-05 20:50:53,135 - Model - INFO - Epoch 1 (1/251):
+2021-06-05 20:56:29,121 - Model - INFO - Learning rate:0.001000
+2021-06-05 21:02:16,808 - Model - INFO - PARAMETER ...
+2021-06-05 21:02:16,808 - Model - INFO - Namespace(batch_size=4, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-05 21:02:19,443 - Model - INFO - The number of training data is: 13998
+2021-06-05 21:02:19,443 - Model - INFO - The number of test data is: 2874
+2021-06-05 21:02:22,046 - Model - INFO - No existing model, starting training from scratch...
+2021-06-05 21:02:28,245 - Model - INFO - Epoch 1 (1/251):
+2021-06-05 21:02:28,245 - Model - INFO - Learning rate:0.001000
+2021-06-07 06:39:46,134 - Model - INFO - PARAMETER ...
+2021-06-07 06:39:46,134 - Model - INFO - Namespace(batch_size=4, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-07 06:39:56,204 - Model - INFO - The number of training data is: 13998
+2021-06-07 06:39:56,204 - Model - INFO - The number of test data is: 2874
+2021-06-07 06:39:59,232 - Model - INFO - No existing model, starting training from scratch...
+2021-06-07 06:40:08,678 - Model - INFO - Epoch 1 (1/251):
+2021-06-07 06:40:08,678 - Model - INFO - Learning rate:0.001000
+2021-06-07 07:08:40,101 - Model - INFO - PARAMETER ...
+2021-06-07 07:08:40,101 - Model - INFO - Namespace(batch_size=4, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-07 07:09:09,823 - Model - INFO - The number of training data is: 13998
+2021-06-07 07:09:09,823 - Model - INFO - The number of test data is: 2874
+2021-06-07 07:09:10,782 - Model - INFO - No existing model, starting training from scratch...
+2021-06-07 07:09:10,786 - Model - INFO - Epoch 1 (1/251):
+2021-06-07 07:09:10,786 - Model - INFO - Learning rate:0.001000
+2021-06-07 07:33:58,444 - Model - INFO - Train accuracy is: 0.84947
+2021-06-07 07:48:12,022 - Model - INFO - eval mIoU of Airplane       0.729603
+2021-06-07 07:48:16,101 - Model - INFO - eval mIoU of Bag            0.447213
+2021-06-07 07:48:22,085 - Model - INFO - eval mIoU of Cap            0.420438
+2021-06-07 07:48:23,024 - Model - INFO - eval mIoU of Car            0.536066
+2021-06-07 07:48:23,772 - Model - INFO - eval mIoU of Chair          0.867272
+2021-06-07 07:48:26,626 - Model - INFO - eval mIoU of Earphone       0.543938
+2021-06-07 07:48:26,626 - Model - INFO - eval mIoU of Guitar         0.773823
+2021-06-07 07:48:26,626 - Model - INFO - eval mIoU of Knife          0.789088
+2021-06-07 07:48:26,626 - Model - INFO - eval mIoU of Lamp           0.738931
+2021-06-07 07:48:26,626 - Model - INFO - eval mIoU of Laptop         0.953616
+2021-06-07 07:48:26,627 - Model - INFO - eval mIoU of Motorbike      0.226290
+2021-06-07 07:48:26,627 - Model - INFO - eval mIoU of Mug            0.594772
+2021-06-07 07:48:26,627 - Model - INFO - eval mIoU of Pistol         0.643531
+2021-06-07 07:48:26,627 - Model - INFO - eval mIoU of Rocket         0.226034
+2021-06-07 07:48:26,627 - Model - INFO - eval mIoU of Skateboard     0.458957
+2021-06-07 07:48:26,627 - Model - INFO - eval mIoU of Table          0.769065
+2021-06-07 07:49:21,620 - Model - INFO - Epoch 1 test Accuracy: 0.891790  Class avg mIOU: 0.607415   Inctance avg mIOU: 0.755312
+2021-06-07 07:50:11,475 - Model - INFO - Save model...
+2021-06-07 07:50:11,475 - Model - INFO - Saving at log\part_seg\2021-06-05_19-52_pointnet2_part_seg_msg\checkpoints/best_model.pth
+2021-06-07 07:50:11,577 - Model - INFO - Saving model....
+2021-06-07 07:50:23,376 - Model - INFO - Best accuracy is: 0.89179
+2021-06-07 07:50:23,821 - Model - INFO - Best class avg mIOU is: 0.60741
+2021-06-07 07:50:24,631 - Model - INFO - Best inctance avg mIOU is: 0.75531
+2021-06-08 10:22:16,174 - Model - INFO - PARAMETER ...
+2021-06-08 10:22:16,175 - Model - INFO - Namespace(batch_size=4, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-08 10:22:30,737 - Model - INFO - The number of training data is: 13998
+2021-06-08 10:22:30,737 - Model - INFO - The number of test data is: 2874
+2021-06-08 10:25:16,017 - Model - INFO - Use pretrain model
+2021-06-08 10:25:34,351 - Model - INFO - Epoch 1 (1/251):
+2021-06-08 10:25:34,351 - Model - INFO - Learning rate:0.001000
+2021-06-08 11:00:29,093 - Model - INFO - PARAMETER ...
+2021-06-08 11:00:29,093 - Model - INFO - Namespace(batch_size=4, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-08 11:23:28,835 - Model - INFO - The number of training data is: 13998
+2021-06-08 11:23:28,835 - Model - INFO - The number of test data is: 2874
+2021-06-08 11:23:31,175 - Model - INFO - Use pretrain model
+2021-06-08 11:23:40,757 - Model - INFO - Epoch 1 (1/251):
+2021-06-08 11:23:40,757 - Model - INFO - Learning rate:0.001000
+2021-06-08 14:41:59,345 - Model - INFO - PARAMETER ...
+2021-06-08 14:41:59,346 - Model - INFO - Namespace(batch_size=4, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-08 14:43:26,257 - Model - INFO - The number of training data is: 13998
+2021-06-08 14:43:26,257 - Model - INFO - The number of test data is: 2874
+2021-06-08 14:43:28,296 - Model - INFO - Use pretrain model
+2021-06-08 14:43:32,772 - Model - INFO - Epoch 1 (1/251):
+2021-06-08 14:43:32,772 - Model - INFO - Learning rate:0.001000
+2021-06-08 15:23:17,928 - Model - INFO - Train accuracy is: 0.90878
+2021-06-08 16:19:51,926 - Model - INFO - eval mIoU of Airplane       0.730498
+2021-06-08 16:19:51,927 - Model - INFO - eval mIoU of Bag            0.447754
+2021-06-08 16:19:51,927 - Model - INFO - eval mIoU of Cap            0.462622
+2021-06-08 16:19:51,927 - Model - INFO - eval mIoU of Car            0.691476
+2021-06-08 16:19:51,927 - Model - INFO - eval mIoU of Chair          0.881074
+2021-06-08 16:19:51,927 - Model - INFO - eval mIoU of Earphone       0.640687
+2021-06-08 16:19:51,928 - Model - INFO - eval mIoU of Guitar         0.835179
+2021-06-08 16:19:51,928 - Model - INFO - eval mIoU of Knife          0.674027
+2021-06-08 16:19:51,928 - Model - INFO - eval mIoU of Lamp           0.764338
+2021-06-08 16:19:51,928 - Model - INFO - eval mIoU of Laptop         0.950112
+2021-06-08 16:19:51,928 - Model - INFO - eval mIoU of Motorbike      0.169909
+2021-06-08 16:19:51,928 - Model - INFO - eval mIoU of Mug            0.652543
+2021-06-08 16:19:51,928 - Model - INFO - eval mIoU of Pistol         0.658047
+2021-06-08 16:19:51,928 - Model - INFO - eval mIoU of Rocket         0.225165
+2021-06-08 16:19:51,929 - Model - INFO - eval mIoU of Skateboard     0.582828
+2021-06-08 16:19:51,929 - Model - INFO - eval mIoU of Table          0.772162
+2021-06-09 08:38:04,985 - Model - INFO - PARAMETER ...
+2021-06-09 08:38:04,986 - Model - INFO - Namespace(batch_size=4, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-09 08:38:08,811 - Model - INFO - The number of training data is: 13998
+2021-06-09 08:38:08,811 - Model - INFO - The number of test data is: 2874
+2021-06-09 08:38:11,571 - Model - INFO - Use pretrain model
+2021-06-09 08:38:15,153 - Model - INFO - Epoch 1 (1/251):
+2021-06-09 08:38:15,153 - Model - INFO - Learning rate:0.001000
+2021-06-09 10:13:42,354 - Model - INFO - PARAMETER ...
+2021-06-09 10:13:42,354 - Model - INFO - Namespace(batch_size=4, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-09 10:13:45,449 - Model - INFO - The number of training data is: 13998
+2021-06-09 10:13:45,449 - Model - INFO - The number of test data is: 2874
+2021-06-09 10:13:46,622 - Model - INFO - Use pretrain model
+2021-06-09 10:13:46,624 - Model - INFO - Epoch 1 (1/251):
+2021-06-09 10:13:46,624 - Model - INFO - Learning rate:0.001000
+2021-06-09 10:24:37,980 - Model - INFO - PARAMETER ...
+2021-06-09 10:24:37,980 - Model - INFO - Namespace(batch_size=4, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-09 10:24:38,536 - Model - INFO - The number of training data is: 13998
+2021-06-09 10:24:38,536 - Model - INFO - The number of test data is: 2874
+2021-06-09 10:24:39,636 - Model - INFO - Use pretrain model
+2021-06-09 10:24:39,637 - Model - INFO - Epoch 1 (1/251):
+2021-06-09 10:24:39,638 - Model - INFO - Learning rate:0.001000
+2021-06-09 10:57:15,045 - Model - INFO - PARAMETER ...
+2021-06-09 10:57:15,045 - Model - INFO - Namespace(batch_size=4, decay_rate=0.0001, epoch=251, gpu='0', learning_rate=0.001, log_dir='2021-06-05_19-52_pointnet2_part_seg_msg', lr_decay=0.5, model='pointnet2_part_seg_msg', normal=True, npoint=2048, optimizer='Adam', step_size=20)
+2021-06-09 10:57:15,610 - Model - INFO - The number of training data is: 13998
+2021-06-09 10:57:15,610 - Model - INFO - The number of test data is: 2874
+2021-06-09 10:57:16,748 - Model - INFO - Use pretrain model
+2021-06-09 10:57:16,750 - Model - INFO - Epoch 1 (1/251):
+2021-06-09 10:57:16,750 - Model - INFO - Learning rate:0.001000

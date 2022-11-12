@@ -1,10 +1,15 @@
+
+
 # PointNet++代码拆解
 
 **参考github地址：**
 
 [yanx27/Pointnet_Pointnet2_pytorch: PointNet and PointNet++ implemented by pytorch (pure python) and on ModelNet, ShapeNet and S3DIS. (github.com)](https://github.com/yanx27/Pointnet_Pointnet2_pytorch)
 
-
+>conda create --name pytorch_1.6_gpu python=3.7.0
+>conda activate pytorch_1.6_gpu
+>conda install pytorch==1.6.0 torchvision==0.7.0 cudatoolkit=10.1 -c pytorch
+>conda install tqdm
 
 ## 1、ShapeNet数据集分析
 
@@ -260,6 +265,8 @@ Process finished with exit code 0
 
 
 
+
+
 1、评估每个类别的miou
 
 
@@ -278,6 +285,190 @@ Process finished with exit code 0
 
 
 
+未增加数据扰动前：一个点的示例如下
+
+![image-20210605211331917](img/image-20210605211331917.png)
+
+```python
+points[:,:, 0:3] = provider.random_scale_point_cloud(points[:,:, 0:3]) 
+```
+
+![image-20210605211404431](img/image-20210605211404431.png)
+
+```python
+points[:,:, 0:3] = provider.shift_point_cloud(points[:,:, 0:3])
+```
+
+![image-20210605211420449](img/image-20210605211420449.png)
+
+
+
+
+
+```
+
+```
+
+
+
+
+
+```python
+classifier = classifier.train()
+seg_pred, trans_feat = classifier(points, to_categorical(label, num_classes)) 
+
+seg_pred   # 值为预测出来部件的结果   4,2048,20
+```
+
+
+
+
+
+num_classes:16
+
+target：torch.Size([4, 2048])
+
+seg_pred：torch.Size([4, 2048, 50]) -> torch.Size([8192, 50]) ->[8192]
+
+
+
+```
+test_metrics['class_avg_iou'] = mean_shape_ious
+```
+
+![image-20210607064117619](img/image-20210607064117619.png)
+
+![image-20210607064103073](img/image-20210607064103073.png)
+
+![image-20210607064131951](img/image-20210607064131951.png)
+
+
+
+
+
+![image-20210607074302915](img/image-20210607074302915.png)
+
+
+
+- 结果数据分析
+
+
+
+```txt
+2021-06-04 23:31:12,172 - Model - INFO - Epoch 251 (251/251):
+2021-06-04 23:31:12,172 - Model - INFO - Learning rate:0.000010
+2021-06-04 23:43:04,485 - Model - INFO - Train accuracy is: 0.95584
+2021-06-04 23:44:57,128 - Model - INFO - eval mIoU of Airplane       0.828985
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Bag            0.813650
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Cap            0.870234
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Car            0.774450
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Chair          0.903383
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Earphone       0.734245
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Guitar         0.911734
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Knife          0.864292
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Lamp           0.837112
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Laptop         0.957848
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Motorbike      0.710170
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Mug            0.950811
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Pistol         0.814806
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Rocket         0.617824
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Skateboard     0.768687
+2021-06-04 23:44:57,129 - Model - INFO - eval mIoU of Table          0.822945
+2021-06-04 23:44:57,129 - Model - INFO - Epoch 251 test Accuracy: 0.943103  Class avg mIOU: 0.823823   Inctance avg mIOU: 0.849895
+2021-06-04 23:44:57,129 - Model - INFO - Best accuracy is: 0.94395
+2021-06-04 23:44:57,129 - Model - INFO - Best class avg mIOU is: 0.82726
+2021-06-04 23:44:57,129 - Model - INFO - Best inctance avg mIOU is: 0.85323
+```
+
+
+
+```
+for cat in sorted(shape_ious.keys()):  # 对应的每种类别的mIoU
+    log_string('eval mIoU of %s %f' % (cat + ' ' * (14 - len(cat)), shape_ious[cat]))
+```
+
+**其中shape_ious，shape_ious是一个字典列表，总共16个字典，**
+
+**len:16   每个字典为airplane、car、cap...它们的iou，通过算每个字典中的平均，得到每个类别的iou，如上所示。**
+
+```python
+test Accuracy: 0.943103  Class avg mIOU: 0.823823   Inctance avg mIOU: 0.849895
+
+log_string('Epoch %d test Accuracy: %f  Class avg mIOU: %f   Instance avg mIOU: %f' % (
+                 epoch+1, test_metrics['accuracy'],test_metrics['class_avg_iou'],test_metrics['instance_avg_iou']))
+```
+
+- test_metrics['accuracy']
+
+```python
+# 正确的总点数/可见的总点数
+test_metrics['accuracy'] = total_correct / float(total_seen)  # 5265761/5885952
+```
+
+
+
+- test_metrics['class_avg_iou']  
+
+mean_shape_ious = np.mean(shape_ious)    对所有值求平均，获得一个值，也就是 **平均类别IOU**
+
+```python
+mean_shape_ious = np.mean(list(shape_ious.values()))
+test_metrics['class_avg_iou'] = mean_shape_ious
+# 直接对所有类别求平均
+```
+
+![image-20210608160518731](img/image-20210608160518731.png)
+
+
+
+
+
+- test_metrics['instance_avg_iou'] : 平均实例IOU
+
+```python
+all_shape_ious = []  # 代表的是2874个test数据集中，每个样本点云的正确率
+
+for cat in shape_ious.keys():  # 计算所有shape的部件 实例iou
+    for iou in shape_ious[cat]:
+        all_shape_ious.append(iou)
+    shape_ious[cat] = np.mean(shape_ious[cat])
+
+test_metrics['instance_avg_iou'] = np.mean(all_shape_ious)
+# 先将所有类别所有样本的准确率取出来，存到all_shape_ious中，再取平均
+```
+
+![image-20210607074138540](img/image-20210607074138540.png)
+
+
+
+![image-20210608163533472](img/image-20210608163533472.png)
+
+
+
+- 输出的评价
+
+```
+2021-06-04 23:44:57,129 - Model - INFO - Best accuracy is: 0.94395
+2021-06-04 23:44:57,129 - Model - INFO - Best class avg mIOU is: 0.82726
+2021-06-04 23:44:57,129 - Model - INFO - Best inctance avg mIOU is: 0.85323
+```
+
+每轮epoch测试后，如果效果好，就保存模型，并得到当前最佳效果。
+
+
+
+- 这个指标没有使用上
+
+```python
+test_metrics['class_avg_accuracy'] = np.mean(  # 部件分割正确的类别点数 / 相应每个部件的点数
+    np.array(total_correct_class) / np.array(total_seen_class, dtype=np.float))
+```
+
+![image-20210608161218949](img/image-20210608161218949.png)
+
+![image-20210608162805080](img/image-20210608162805080.png)
+
+![image-20210608162753010](img/image-20210608162753010.png)
 
 
 
@@ -285,16 +476,4 @@ Process finished with exit code 0
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+![image-20210608105934962](img/image-20210608105934962.png)

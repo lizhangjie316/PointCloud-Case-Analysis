@@ -33,7 +33,7 @@ def to_categorical(y, num_classes):
 def parse_args():
     '''PARAMETERS'''
     parser = argparse.ArgumentParser('PointNet')
-    parser.add_argument('--batch_size', type=int, default=24, help='batch size in testing [default: 24]')
+    parser.add_argument('--batch_size', type=int, default=32, help='batch size in testing [default: 24]')
     parser.add_argument('--gpu', type=str, default='0', help='specify gpu device [default: 0]')
     parser.add_argument('--num_point', type=int, default=2048, help='Point Number [default: 2048]')
     parser.add_argument('--log_dir', type=str, default='pointnet2_part_seg_ssg', help='Experiment root')

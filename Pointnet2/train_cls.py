@@ -22,10 +22,11 @@ sys.path.append(os.path.join(ROOT_DIR, 'models'))
 --log_dir pointnet2_cls_msg
 """
 
+# python train_cls.py --model pointnet2_cls_ssg --normal --log_dir pointnet2_cls_ssg_normal
 def parse_args():
     '''PARAMETERS'''
     parser = argparse.ArgumentParser('PointNet')
-    parser.add_argument('--batch_size', type=int, default=8, help='batch size in training [default: 24]')
+    parser.add_argument('--batch_size', type=int, default=60, help='batch size in training [default: 24]')  # 本机能够满足60的batch_size
     parser.add_argument('--model', default='pointnet2_cls_msg', help='model name [default: pointnet_cls]')
     parser.add_argument('--epoch',  default=200, type=int, help='number of epoch in training [default: 200]')
     parser.add_argument('--learning_rate', default=0.001, type=float, help='learning rate in training [default: 0.001]')
@@ -98,7 +99,7 @@ def main(args):
 
     '''DATA LOADING'''
     log_string('Load dataset ...')
-    DATA_PATH = 'data/modelnet40_normal_resampled/'
+    DATA_PATH = '../data/modelnet40_normal_resampled/'
 
     TRAIN_DATASET = ModelNetDataLoader(root=DATA_PATH, npoint=args.num_point, split='train',
                                                      normal_channel=args.normal)
